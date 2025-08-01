@@ -1,5 +1,4 @@
 ---
-
 title: Test Blog
 published: 2025-08-01T12:09:40+08:00
 summary: "测试文章"
@@ -9,7 +8,7 @@ tags: [个人记录]
 categories: '记录'
 draft: false 
 lang: ''
-
+hidden: true
 ---
 
 # 这是一个测试文章

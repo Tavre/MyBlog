@@ -53,6 +53,8 @@
     </h3>
     <div class="archive-posts">
       {{- range .Pages }}
+       {{- if not .Params.hidden }} <!-- 隐藏 -->
+       
       {{- if eq .Kind "page" }}
       <div class="archive-entry">
         <h3 class="archive-entry-title entry-hint-parent">
@@ -73,6 +75,8 @@
       </div>
       {{- end }}
       {{- end }}
+
+      {{- end }}  <!-- 隐藏 -->
     </div>
   </div>
   {{- end }}
