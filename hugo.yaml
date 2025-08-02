@@ -28,6 +28,16 @@ params:
     Content: >
           欢迎来到我的博客
           本博客用于记录以及分享我个人的学习以及生活
+  
+  # Header背景图片配置
+  headerBackground:
+    enabled: true # 启用header背景图片
+    image: "https://cdn.jsdelivr.net/gh/TenKavr/test_gi@main/images/20241022004016692.png" # 背景图片路径
+    extendToHomeInfo: true # 将背景延伸到首页信息区域
+    overlay:
+      enabled: true # 启用遮罩层
+      opacity: 0.3 # 遮罩层透明度 (0-1)
+      darkModeOpacity: 0.5 # 暗色模式下的遮罩层透明度
 
   # 设置网站头像和首页头像
   profileMode:
@@ -64,6 +74,10 @@ menu:
       name: 归档
       url: /archives/
       weight: 30
+    - identifier: links
+      name: 友链
+      url: /links/
+      weight: 35
     - identifier: search
       name: 搜索
       url: /search/

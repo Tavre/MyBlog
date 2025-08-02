@@ -1,0 +1,203 @@
+{{- if site.Params.headerBackground.enabled -}}
+<style>
+/* 动态header和首页信息区域背景图片样式 */
+
+/* 消除main容器的上边距，让背景图片延伸到页面顶部 */
+.main {
+    padding-top: 0;
+}
+
+/* 消除页面头部的上边距 */
+.page-header {
+    margin-top: 0 !important;
+}
+
+/* 消除首页信息区域的上边距 */
+.first-entry.home-info {
+    margin-top: 0 !important;
+}
+
+.header {
+    position: relative;
+    background-image: url('{{ site.Params.headerBackground.image | default "/images/header-bg.svg" }}');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin: 0;
+    padding: 0;
+    top: 0;
+}
+
+{{- if site.Params.headerBackground.extendToHomeInfo -}}
+/* 首页信息配置区域背景 */
+.home-info {
+    position: relative;
+    background-image: url('{{ site.Params.headerBackground.image | default "/images/header-bg.svg" }}');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+    margin-top: 0;
+    padding: 2rem 0;
+    border-radius: 0;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+}
+{{- end -}}
+
+{{- if site.Params.headerBackground.overlay.enabled -}}
+/* 添加半透明遮罩层以确保文字可读性 */
+.header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, {{ site.Params.headerBackground.overlay.opacity | default 0.3 }});
+    z-index: 1;
+}
+
+{{- if site.Params.headerBackground.extendToHomeInfo -}}
+/* 首页信息区域遮罩层 */
+.home-info::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, {{ site.Params.headerBackground.overlay.opacity | default 0.3 }});
+    z-index: 1;
+}
+{{- end -}}
+{{- end -}}
+
+/* 确保导航内容在遮罩层之上 */
+.header .nav {
+    position: relative;
+    z-index: 2;
+    max-width: calc(var(--nav-width) + var(--gap) * 2);
+    margin: 0 auto;
+    padding: 0 var(--gap);
+    line-height: var(--header-height);
+    min-height: var(--header-height);
+}
+
+{{- if site.Params.headerBackground.extendToHomeInfo -}}
+/* 确保首页信息内容在遮罩层之上 */
+.home-info .entry-header,
+.home-info .entry-content,
+.home-info .entry-footer {
+    position: relative;
+    z-index: 2;
+    max-width: calc(var(--main-width) + var(--gap) * 2);
+    margin: 0 auto;
+    padding: 0 var(--gap);
+}
+{{- end -}}
+
+/* 增强文字对比度 */
+.header .nav a {
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+/* 主题切换按钮样式调整 */
+.header button#theme-toggle {
+    color: white;
+    filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.7));
+}
+
+/* Logo文字样式调整 */
+.header .logo a {
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* 语言切换样式调整 */
+.header .lang-switch a {
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+/* 活跃菜单项样式调整 */
+.header #menu .active {
+    color: white;
+    border-bottom-color: rgba(255, 255, 255, 0.8);
+}
+
+{{- if site.Params.headerBackground.extendToHomeInfo -}}
+/* 首页信息区域文字样式 */
+.home-info .entry-header h1 {
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.home-info .entry-content {
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+/* 首页社交图标样式调整 */
+.home-info .entry-footer .social_icons a {
+    color: white;
+    filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.7));
+}
+{{- end -}}
+
+{{- if site.Params.headerBackground.overlay.enabled -}}
+/* 暗色主题下的调整 */
+body.dark .header::before {
+    background: rgba(0, 0, 0, {{ site.Params.headerBackground.overlay.darkModeOpacity | default 0.5 }});
+}
+
+body.dark .header .nav a {
+    color: #e0e0e0;
+}
+
+{{- if site.Params.headerBackground.extendToHomeInfo -}}
+/* 暗色主题下首页信息区域调整 */
+body.dark .home-info::before {
+    background: rgba(0, 0, 0, {{ site.Params.headerBackground.overlay.darkModeOpacity | default 0.5 }});
+}
+
+body.dark .home-info .entry-header h1,
+body.dark .home-info .entry-content {
+    color: #e0e0e0;
+}
+{{- end -}}
+{{- end -}}
+
+/* 响应式设计 - 移动设备上使用较小的背景图片 */
+@media (max-width: 768px) {
+    .header {
+        background-attachment: scroll;
+        background-size: cover;
+    }
+    
+    {{- if site.Params.headerBackground.extendToHomeInfo -}}
+    .home-info {
+        background-attachment: scroll;
+        background-size: cover;
+    }
+    {{- end -}}
+    
+    .header .nav {
+        padding: 0 1rem;
+    }
+    
+    {{- if site.Params.headerBackground.extendToHomeInfo -}}
+    .home-info .entry-header,
+    .home-info .entry-content,
+    .home-info .entry-footer {
+        padding: 0 1rem;
+    }
+    {{- end -}}
+}
+</style>
+{{- end -}}
